@@ -1,6 +1,6 @@
 # num = 5
 
-# print(num.__add__(6))
+print(num.__add__(6))
 
 class distance:
     def __init__(self, x=None,y=None):
