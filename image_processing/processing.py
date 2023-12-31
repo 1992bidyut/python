@@ -1,4 +1,5 @@
 # https://www.youtube.com/watch?v=6wI6tzRogZQ
+# ..
 import cv2
 rtsp_url = 'rtsp://192.168.0.44:554/Streaming/Channels/1'
 
