@@ -4,11 +4,12 @@ rtsp_url = 'rtsp://192.168.0.44:554/Streaming/Channels/1'
 cap = cv2.VideoCapture(rtsp_url, cv2.CAP_FFMPEG)
 # cap = cv2.VideoCapture(0)
 if not cap.isOpened():
-    print("Error: Could not open camera.")
-    print("Video Width:", cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-    print("Video Height:", cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    print("Video FPS:", cap.get(cv2.CAP_PROP_FPS))
-    # exit()
+    exit()
+    
+print("Error: Could not open camera.")
+print("Video Width:", cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+print("Video Height:", cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+print("Video FPS:", cap.get(cv2.CAP_PROP_FPS))
 
 while True:
     ret, frame = cap.read()
