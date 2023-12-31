@@ -1,8 +1,6 @@
 # https://www.youtube.com/watch?v=6wI6tzRogZQ
-# ..
 import cv2
 rtsp_url = 'rtsp://192.168.0.44:554/Streaming/Channels/1'
-
 cap = cv2.VideoCapture(rtsp_url, cv2.CAP_FFMPEG)
 # cap = cv2.VideoCapture(0)
 if not cap.isOpened():
