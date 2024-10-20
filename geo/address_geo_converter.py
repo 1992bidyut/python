@@ -6,6 +6,7 @@ df = pd.read_excel('Textile.xlsx')
 
 # Define the API key and base URL
 # api_key = 'YOUR_GOOGLE_API_KEY'
+api_key = 'AIzaSyChxzY3hBhf-LJKehBweTkVv7N-4EuckHM'
 base_url = 'https://maps.googleapis.com/maps/api/geocode/json'
 
 # Function to get coordinates

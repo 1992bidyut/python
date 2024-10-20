@@ -5,7 +5,7 @@ import requests
 df = pd.read_excel('Market.xlsx')
 
 # Define the API key and base URL for Google Places API
-
+api_key = 'AIzaSyChxzY3hBhf-LJKehBweTkVv7N-4EuckHM'
 base_url = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json'
 
 # Function to get coordinates using business name
