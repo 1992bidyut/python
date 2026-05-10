@@ -1,10 +1,13 @@
+import datetime
 import json
 import threading
+import time
 
 import requests
 
 #change to your base url or hosting address of your server
 BASE_URL = 'http://localhost:9000/' 
+
 # create a users array with username and password
 USER_ARRAY = [
     {"username": "atec-1@gmail.com","password": "1234"},
@@ -49,10 +52,9 @@ def accesstoken_request(API_ENDPOINT):
     }
 
     data = {
-        
-        "client_id": "09d25e094faa6ca2556c818166b7a9563a33f7099f6f0f4caa6cf63b88e8d3e7",
-        "client_secret": "09d25e094faa6ca2556c818177b7a9563a33f7099f6f0f4caa6cf63b88e8d3e7"
-    }
+        "client_id":"09d25e094faa6ca2556c818166b7a9563a33f7099f6f0f4caa6cf63b88e8d3e7",
+        "client_secret":"09d25e094faa6ca2556c818177b7a9563a33f7099f6f0f4caa6cf63b88e8d3e7"
+        }
     response = requests.post(API_ENDPOINT, headers=headers, data=json.dumps(data))
 
     if response.status_code ==200:
@@ -90,20 +92,24 @@ def api_request(index, API_ENDPOINT, user):
     jwt_token = user_login_request(LOGIN_ENDPOINT, user)
     print(user['username'])
     if jwt_token:
-        print(f"Thread {index} started")
+        start = datetime.datetime.now()
+        print(f"{start} Thread {index} started!")
         headers = {'Authorization': f'Bearer {jwt_token}'}
         response = requests.get(API_ENDPOINT, headers=headers)
-        # Synchronize threads at the barrier
-        barrier.wait()
         
         success = 0
         failed = 0
         if response.status_code ==200:
-            print(f"Thread: {index}. User: {user['username']}. Completed with status code: {response.status_code}")
+            end = datetime.datetime.now()
+            print(f"{end} Thread: {index}. User: {user['username']}. Completed with status code: {response.status_code}. Time: {end-start}")
             success = success + 1
         else:
-            print(f"Thread: {index}.User: {user['username']}. Failed status code: {response.status_code}")
+            end = datetime.datetime.now()
+            print(f"{end} Thread: {index}.User: {user['username']}. Failed status code: {response.status_code}. Time: {end-start}")
             failed =  failed + 1  
+        
+        # Synchronize threads at the barrier
+        barrier.wait()
     else:
         print(f"Thread: {index}. JWT Error!")
         return False
@@ -114,6 +120,7 @@ def concurrent_calls(USER_ARRAY):
     count = 1
     threads = []
     for user in USER_ARRAY:
+        time.sleep(1)
         thread = threading.Thread(target=api_request, args=(count, FINAL_ENDPOINT, user))
         thread.start()
         threads.append(thread)
